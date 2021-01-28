@@ -12,5 +12,10 @@ app.use(routes);
 app.use(express.static("uploads"),)
 app.use(express.json())
 
+
+const io = (module.exports.io =require('socket.io')(server))
+const socketManager = require('./socketManager/socketManager')
+io.on("connection",socketManager)
+
 const PORT= process.env.PORT || 3004;
 server.listen(PORT,()=>console.log(`Server Running in port ${PORT}`));
