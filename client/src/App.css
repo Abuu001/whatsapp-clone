@@ -1,0 +1,22 @@
+*{
+  margin: 0;
+}
+.App{
+  min-width: 619px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left__Side{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+}
+.right__Side{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}

@@ -1,0 +1,72 @@
+.chat__Section{
+    flex: 1;
+    background-color: #e5ddd5;
+    padding: 20px 20px;
+    overflow-y: scroll;
+}
+.chat{
+    line-height: 18px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 11px;
+    margin-bottom: 20px;
+    clear: both;
+    /* width: 155px; */
+    min-width: 180px;
+    position: relative;
+}
+.chat::after{
+    content: "   ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    bottom: auto;
+    border: 22px solid;
+}
+.msg{
+    color: black;
+    font-size: 15px;
+    margin: 5px 0 15px 0;
+}
+.name{
+
+}
+.time{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 11px;
+    color: #00000073;
+}
+.you{
+    float: left;
+    margin-right: 10%;
+    font-size: 14px;
+    left: 15px;
+}
+.you::after{
+    left: -12px;
+    right: auto;
+    border-color: #fff transparent transparent transparent;
+}
+.you .name{
+    font-weight: 500;
+    color: #36cd96;
+}
+
+.me{
+    float: right;
+    margin-right: 10%;
+    background: #dbf8c6;
+    right:15px;
+}
+.me::after{
+    left: auto;
+    right: -12px;
+    border-color: #dbf8c6 transparent transparent transparent;
+}
+.me .name{
+    font-weight: 500;
+    color: #da2d21;
+}
