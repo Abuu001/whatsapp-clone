@@ -4,10 +4,10 @@ import ChartHeader from "./ChatHeader";
 import Chat from "./Chat"
 import ChatForm from "./ChatForm"
 
-function ChartSection() {
+function ChartSection({authInfo}) {
     return (
         <div>
-            <ChartHeader />
+            <ChartHeader authInfo={authInfo} />
             <Chat />
             <ChatForm />
         </div>

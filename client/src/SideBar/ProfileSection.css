@@ -23,3 +23,6 @@
     height: 100%;
     border-radius: 50%;
 }
+.action__Items{
+    cursor: pointer;
+}

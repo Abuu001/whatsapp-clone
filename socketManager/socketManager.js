@@ -57,7 +57,6 @@ module.exports =(socket)=>{
                 }
                 console.log("User left");
             }
-
             socket.broadcast.emit("new-offline-user",offlineUsers)
         })
 
