@@ -14,6 +14,12 @@ ALTER TABLE whatsappMainMessages ADD COLUMN name VARCHAR(20) NOT NULL;
 
 INSERT INTO table_name(column1, column2, …)VALUES (value1, value2, …);
 
-INSERT INTO whatsappMainMessages(messages, image_sent,name)VALUES ('waah', '', 'viky') RETURNING *;
+INSERT INTO whatsappMainMessages(messages, image_sent,name)VALUES ('js', '', 'Mishyy') RETURNING *;
 
 ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent  TYPE  TIME DEFAULT CURRENT_TIME(1);
+
+SELECT * FROM whatsappmainmessages ORDER BY  time_sent ASC;
+
+ALTER TABLE whatsappMainMessages ALTER COLUMN messages  TYPE  TIME DEFAULT CURRENT_TIME(1);
+
+SELECT * FROM whatsappmainmessages  WHERE messages IS NOT NULL  OR messages !="";
