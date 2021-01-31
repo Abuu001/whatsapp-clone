@@ -31,15 +31,24 @@ function Chat({authInfo}) {
     },[])
 
     const msgLoop=messages.map(msg=>{
-    
+        // const date = new Date(parseInt(msg.time_sent));
+        // const localeSpecificTime = date.toLocaleTimeString();
+
+        var date = new Date(parseInt(msg.time_sent));
+        const localeSpecificTime = date.toLocaleTimeString(navigator.language, {
+                hour: '2-digit',
+                minute:'2-digit'
+            });
+
         return(
-              <div className="chat me" key={msg.id} >
+              <div className= {`${authInfo[0].additionalUserInfo?.profile.given_name  !== msg.name ?   `${'chat you'}` : `${'chat me'}` }`}  key={msg.id} >
                     <span className="name">
                     {/* {authInfo[0].additionalUserInfo?.profile.given_name } */}
                     {msg.name}
                     </span>
                     <p className="msg">{msg.messages}</p>
-                    <span className="time">{msg.time_sent}</span> 
+                    {/* <span className="time">{msg.time_sent}</span>  */}
+                    <span className="time">{localeSpecificTime}</span> 
                     <CancelOutlinedIcon fontSize="small"  className="cancelBtn" onClick={()=>deleteMsgHandler(msg.id)}/>
                </div>  
         )
