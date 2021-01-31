@@ -1,13 +1,57 @@
-const router =require('express').Router();
-const controller=require('../controllers/controller')
-const {userProfileUpload,audioUpload,imageMgsFileUpload} =require('../controllers/helper')
+const router = require('express').Router()
+const pool = require('../config/db')
 
-router.post('/api/login',userProfileUpload,controller.userLogin)
-router.get('/api/users-list/:id',controller.getUserList)
-router.get('/api/user/:id',controller.getUserInfo)
-router.post('/api/chats',controller.getUserChats)
-// router.get('/api/user/is-offline/:id',controller.checkIfUserOffline)
-router.post('/api/upload-voice',audioUpload,controller.uploadVoice)
-router.post('/api/upload-image-file',imageMgsFileUpload,controller.uploadImageFile)
+//API ENDPOINTS
 
-module.exports= router;
+//get messages api
+router.get('/messages',async(req,res)=>{
+    try {
+        const response = await pool.query("SELECT * FROM whatsappmainmessages ");
+        console.log(response.rows);
+        res.status(200).json({
+            length : response.rows.length,
+            message : response.rows
+        } )
+    } catch (error) {
+        res.status(500).json({
+            message : "An error occurred"
+        })
+    }
+})
+
+//post messages api
+router.post('/messages',async(req,res)=>{
+    try {
+        const {name,image,message}= req.body
+        const response = await pool.query("INSERT INTO whatsappMainMessages (messages,image_sent,name)  VALUES($1,$2,$3) RETURNING *",[message,image,name])
+
+        res.status(200).json({
+            length : response.rows.length,
+            message : response.rows
+        } )
+    } catch (error) {
+        res.status(500).json({
+            message : "An error occurred"
+        })
+    }
+})
+
+//delete messages api
+router.put('/messages/:id',async(req,res)=>{
+    try {
+        const {id}= req.params
+        const response = await pool.query("DELETE  FROM whatsappMainMessages WHERE id=$1 ",[id])
+
+        res.status(200).json({
+            length : response.rows.length,
+            message : "Deleted sucessfully"
+        } )
+    } catch (error) {
+        res.status(500).json({
+            message : "An error occurred"
+        })
+    }
+})
+
+
+module.exports=router
