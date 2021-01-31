@@ -1,7 +1,7 @@
 import React from 'react'
 import "./ChatCardListing.css"
 
-function ChartCardListing({authInfo}) {
+function ChartCardListing() {
     return (
         <div className="chartCard__Listing">
             <div className="card">
@@ -11,7 +11,7 @@ function ChartCardListing({authInfo}) {
                     </div>
                     <div className="card__Detail">
                         <h5 className="title"> 
-                            {authInfo[0].additionalUserInfo?.profile.given_name}
+                            Go Lang
                         </h5>
                         <p  className="card__Description">typing....</p>
                     </div>
@@ -24,7 +24,31 @@ function ChartCardListing({authInfo}) {
                     <i className="fas fa-chevron-down"></i>
                 </div>
             </div>
-            
+
+
+
+            <div className="chartCard__Listing">
+            <div className="card">
+                <div className="card__det">
+                    <div className="img__Container">
+                     <img alt="image" src="data:image/png;base64,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" />
+                    </div>
+                    <div className="card__Detail">
+                        <h5 className="title"> 
+                            Node Js
+                        </h5>
+                        <p  className="card__Description">typing....</p>
+                    </div>
+                </div>
+             
+                <div className="time">
+                    06:52 PM
+                </div>
+                <div className="actionBtn">
+                    <i className="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            </div>
         </div>
     )
 }

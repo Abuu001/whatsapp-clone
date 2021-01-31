@@ -6,12 +6,12 @@ import ChatForm from "./ChatForm"
 
 function ChartSection({authInfo}) {
     return (
-        <div>
+        <>
             <ChartHeader authInfo={authInfo} />
-            <Chat />
-            <ChatForm />
-        </div>
+            <Chat authInfo={authInfo}/>
+            <ChatForm authInfo={authInfo}/> 
+        </>
     )
-}
+} 
 
 export default ChartSection

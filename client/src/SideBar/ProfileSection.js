@@ -11,7 +11,7 @@ function ProfileSection({setCount,setAuthInfo,authInfo}) {
         setCount(0)
         setAuthInfo([]) 
     }   
- 
+  
     return (
         <div className="profile__Section">
             <div  className="img__Container">
