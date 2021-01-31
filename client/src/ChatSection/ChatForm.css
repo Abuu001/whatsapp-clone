@@ -36,3 +36,13 @@
     color: #555;
     outline-width: 0;
 }
+/* .btn__disable{
+    opacity: .5 !important;
+    cursor: not-allowed !important;
+    outline: none !important;
+}
+.btn__enable{
+    outline: none !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+} */
