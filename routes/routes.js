@@ -6,7 +6,7 @@ const pool = require('../config/db')
 //get messages api
 router.get('/messages',async(req,res)=>{
     try {
-        const response = await pool.query("SELECT * FROM whatsappmainmessages ");
+        const response = await pool.query("SELECT * FROM whatsappmainmessages  ORDER BY  time_sent ASC ");
         console.log(response.rows);
         res.status(200).json({
             length : response.rows.length,
