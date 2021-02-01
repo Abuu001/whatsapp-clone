@@ -14,7 +14,7 @@ ALTER TABLE whatsappMainMessages ADD COLUMN name VARCHAR(20) NOT NULL;
 
 INSERT INTO table_name(column1, column2, …)VALUES (value1, value2, …);
 
-INSERT INTO whatsappMainMessages(messages, image_sent,name)VALUES ('js', '', 'Mishyy') RETURNING *;
+INSERT INTO whatsappMainMessages(messages, image_sent,name)VALUES ('tt', '', 'v1') RETURNING *;
 
 ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent  TYPE  TIME DEFAULT CURRENT_TIME(1);
 
@@ -23,3 +23,20 @@ SELECT * FROM whatsappmainmessages ORDER BY  time_sent ASC;
 ALTER TABLE whatsappMainMessages ALTER COLUMN messages  TYPE  TIME DEFAULT CURRENT_TIME(1);
 
 SELECT * FROM whatsappmainmessages  WHERE messages IS NOT NULL  OR messages !="";
+
+  CREATE FUNCTION notify_trigger() RETURNS trigger AS $$
+    DECLARE
+    BEGIN
+      PERFORM pg_notify('watch_whatsappmainmessages', row_to_json(NEW)::text);
+      RETURN new;
+    END;
+    $$ LANGUAGE plpgsql;
+
+    CREATE TRIGGER watch_whatsappmainmessages_trigger AFTER INSERT ON whatsappmainmessages
+    FOR EACH ROW EXECUTE PROCEDURE notify_trigger();
+
+    CREATE TRIGGER watch_whatsappmainmessages AFTER INSERT ON whatsappmainmessages
+    FOR EACH ROW EXECUTE PROCEDURE notify_trigger();
+
+     CREATE TRIGGER watch_whatsappmainmessages_delete AFTER DELETE ON whatsappmainmessages
+    FOR EACH ROW EXECUTE PROCEDURE notify_trigger();
