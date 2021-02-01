@@ -4,6 +4,7 @@ import axios from "axios"
 import moment from "moment"
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { toast } from 'react-toastify';
+import Pusher from "pusher-js";
 
 
 function Chat({authInfo}) {
@@ -13,32 +14,75 @@ function Chat({authInfo}) {
         await axios.get("/api/v1/messages")
         .then(response=>{
             const gg =response.data.message
-            //console.log(gg);
-            gg.map(tt=>console.log(tt))  
-      
+            console.log(gg);
+            // gg.map(tt=>console.log(tt))  
+       
+            // setMessages([...response.data.message])
             setMessages([...response.data.message])
         })
     }
 
     const deleteMsgHandler=async(id)=>{
-        await axios.put(`/api/v1/messages/${id}`)
+        await axios.delete(`/api/v1/messages/${id}`)
+        console.log("deletee");
         toast.warning("Message deleted !!!",{position:"top-right"})
+        // messages.pop()
+        // setMessages([...messages])
     }
  
     useEffect(()=>{
-        getMessages()
+        getMessages() 
         deleteMsgHandler()
-    },[])
+    },[]) 
+
+    useEffect(()=>{
+        const pusher = new Pusher('55c0872bf47901e1b4a2', {
+            cluster: 'eu',
+            encrypted: true
+          });
+        
+           const channel = pusher.subscribe('watch_whatsappmainmessages');
+           channel.bind('new_record', (newMessage)=> { 
+                
+            //   alert(JSON.stringify(newMessage))  
+              console.log(newMessage);
+              messages.push(newMessage)
+              setMessages([...messages])
+       
+        });
+ 
+        //for delete
+        const pusher_delete = new Pusher('55c0872bf47901e1b4a2', {
+            cluster: 'eu',
+            encrypted: true
+          });
+        
+           const channel_delete = pusher_delete.subscribe('watch_whatsappmainmessages_delete');
+           channel.bind('delete', (newMessage)=> { 
+                
+              alert(JSON.stringify(newMessage))  
+            //   console.log(newMessage);
+            //   messages.push(newMessage)
+              setMessages([...newMessage])
+       
+        });
+        return()=>{  
+            channel.unbind_all()
+            channel.unsubscribe();
+            channel_delete.unbind_all()
+            channel_delete.unsubscribe()
+        }
+    },[messages])
 
     const msgLoop=messages.map(msg=>{
         // const date = new Date(parseInt(msg.time_sent));
         // const localeSpecificTime = date.toLocaleTimeString();
 
-        var date = new Date(parseInt(msg.time_sent));
-        const localeSpecificTime = date.toLocaleTimeString(navigator.language, {
-                hour: '2-digit',
-                minute:'2-digit'
-            });
+        // var date = new Date(parseInt(msg.time_sent));
+        // const localeSpecificTime = date.toLocaleTimeString(navigator.language, {
+        //         hour: '2-digit',
+        //         minute:'2-digit'
+        //     });
 
         return(
               <div className= {`${authInfo[0].additionalUserInfo?.profile.given_name  !== msg.name ?   `${'chat you'}` : `${'chat me'}` }`}  key={msg.id} >
@@ -48,7 +92,7 @@ function Chat({authInfo}) {
                     </span>
                     <p className="msg">{msg.messages}</p>
                     {/* <span className="time">{msg.time_sent}</span>  */}
-                    <span className="time">{localeSpecificTime}</span> 
+                    <span className="time">{msg.time_sent}</span> 
                     <CancelOutlinedIcon fontSize="small"  className="cancelBtn" onClick={()=>deleteMsgHandler(msg.id)}/>
                </div>  
         )
