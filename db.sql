@@ -14,7 +14,7 @@ ALTER TABLE whatsappMainMessages ADD COLUMN name VARCHAR(20) NOT NULL;
 
 INSERT INTO table_name(column1, column2, …)VALUES (value1, value2, …);
 
-INSERT INTO whatsappMainMessages(messages, image_sent,name)VALUES ('tt', '', 'v1') RETURNING *;
+INSERT INTO whatsappMainMessages(messages, time_sent,image_sent,name)VALUES ('red', '12:00 PM','', 'Martha') RETURNING *;
 
 ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent  TYPE  TIME DEFAULT CURRENT_TIME(1);
 
@@ -40,3 +40,8 @@ SELECT * FROM whatsappmainmessages  WHERE messages IS NOT NULL  OR messages !=""
 
      CREATE TRIGGER watch_whatsappmainmessages_delete AFTER DELETE ON whatsappmainmessages
     FOR EACH ROW EXECUTE PROCEDURE notify_trigger();
+
+    ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent DROP DEFAULT;
+    ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent TYPE VARCHAR(10)   ;
+
+ 

@@ -13,7 +13,7 @@
     flex: 1;
     background-color: #e5ddd5;
     padding: 20px 20px;
-    overflow-y: scroll;
+   overflow-y: scroll;
 }
 .chat{
     max-width: 55px;
@@ -81,4 +81,13 @@
 .me .name{
     font-weight: 500;
     color: #da2d21;
+}
+
+@media (max-width: 591px){
+    .chat__Section{
+
+        /* flex: .5; */ 
+        /* height: 100vh; */
+        /* padding: 5px 5px; */
+    }
 }
