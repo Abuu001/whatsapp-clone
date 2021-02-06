@@ -29,13 +29,11 @@ const App= ()=> {
       })
       .catch(err=>alert(err.message))
   }
-    console.log(authInfo[0]?.user.displayName);
-    console.log(authInfo[0]);
-     
+
   return (
     <>
       {
-        count   > 0 ?    
+        count   > 0 ?     
             (
             <ModelView  setCount={setCount}  authInfo={authInfo} setAuthInfo={setAuthInfo}/>
             )  :

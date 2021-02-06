@@ -4,6 +4,7 @@ import SendIcon from '@material-ui/icons/Send';
 import axios from "axios";
 import Picker from 'emoji-picker-react';
 import IconButton from '@material-ui/core/IconButton';
+import moment from "moment"
 
 function ChatForm({authInfo}) {
  
@@ -19,19 +20,19 @@ function ChatForm({authInfo}) {
     };
 
     const submitMsgHandler=async()=>{
-console.log(sendMsg.length);
-                   
-        const data={
-                    name : authInfo[0].additionalUserInfo?.profile.given_name,
-                    image : sendFile,
-                    message : sendMsg
-                }
-              await  axios.post("/api/v1/messages",data)
 
-                 // if  !messages => disable button 
-                //  if(sendMsg.length <=1 ){
-                //     setDisableSubmitBtn(prevState=>!prevState)
-                // }
+   //if there !text => dont send empty msgs
+        if(!sendMsg.length <1 && !sendMsg !==''){
+            const currentTime =moment().format('LT');
+            const data={
+                name : authInfo[0].additionalUserInfo?.profile.given_name,
+                image : sendFile,
+                messages : sendMsg,
+                time_sent : currentTime
+            }
+       await  axios.post("/api/v1/messages",data)
+           
+        }
 
         setSendMsg('') 
         setSendFile('')

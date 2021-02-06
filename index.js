@@ -11,7 +11,6 @@ app.use(cors())
 app.use(express.static("uploads"),)
 app.use(express.json())
 
-  
 app.use("/api/v1",router)
 
 const PORT= process.env.PORT || 3004;
