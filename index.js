@@ -5,11 +5,15 @@ const http= require('http')
 const server = http.createServer(app)
 const cors =require('cors')
 const router=require('./routes/routes')
+const fileUpload =require('express-fileupload')
 
 //middlewares
 app.use(cors())
 app.use(express.static("uploads"),)
 app.use(express.json())
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+  }));
 
 app.use("/api/v1",router)
 
