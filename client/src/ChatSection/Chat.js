@@ -5,20 +5,23 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 // import { toast } from 'react-toastify';
 import Pusher from "pusher-js";
 import FlipMove from 'react-flip-move';
+// import { css } from 'emotion';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 const Chat= ({authInfo})=> {
+ 
     const [messages,setMessages]=useState([])
 
-    const getMessages=async()=>{
-       await  axios.get("/api/v1/messages")
+    const getMessages=()=>{
+         axios.get("/api/v1/messages")
         .then(response=>{
             setMessages([...response.data.message])
         })
     }
 
-    const deleteMsgHandler= async(id)=>{
+    const deleteMsgHandler= (id)=>{
        // toast.warning("Message deleted !!!",{position:"top-right"})
-     await axios.delete(`/api/v1/messages/${id}`)
+      axios.delete(`/api/v1/messages/${id}`)
     } 
  
     useEffect(()=>{
@@ -52,8 +55,8 @@ const Chat= ({authInfo})=> {
         });
         return()=>{  
             channel.unbind_all()
-            channel.unsubscribe();
             channel_delete.unbind_all()
+            channel.unsubscribe();
             channel_delete.unsubscribe()
         }
     },[messages])
@@ -73,10 +76,12 @@ const Chat= ({authInfo})=> {
  
     return ( 
         <div className="chat__Section"  >
-            <FlipMove >
-               {msgLoop}             
-            </FlipMove>
-        </div>
+            {/* <ScrollToBottom  mode="bottom" behaviour="smooth" > */}
+                <FlipMove  enterAnimation="fade">
+                 {msgLoop}             
+                </FlipMove>
+            {/* </ScrollToBottom> */}
+        </div> 
     )
 };
 
