@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const pool = require('../config/db')
 const pusher = require('../config/pusher')
+const path=require('path')
 
 let pgClient;
 pool.connect(async(err,client)=>{
@@ -44,8 +45,7 @@ router.get('/messages',async(req,res)=>{
 router.post('/messages',async(req,res)=>{
     try {
         const {name,image,messages,time_sent}= req.body;
-      //  const payload = req.body; // stores all the user req in var payload;
-
+    
         const response = await pgClient.query("INSERT INTO whatsappMainMessages (messages,time_sent,image_sent,name)  VALUES($1,$2,$3,$4) RETURNING *",[messages,time_sent,image,name])
 
         if(req.method === 'POST'){
@@ -87,6 +87,20 @@ router.delete('/messages/:id',async(req,res)=>{
         }) 
     }
 })
-
+ 
+router.post('/uploads',async(req,res)=>{
+    try {
+        //fetching the name of the img
+        const img = req.files.file;
+        let uploadPath = path.join(__dirname,"../client/src/uploads/"+img.name)
+   
+        //moving the image to uploads path
+       await  img.mv(uploadPath)
+    } catch (error) {
+        res.status(500).json({
+            message : "An error occurred"
+        }) 
+    }
+}) 
 
 module.exports=router
