@@ -36,6 +36,17 @@
     color: #555;
     outline-width: 0;
 }
+#file__Input:hover{
+    cursor: pointer;
+}
+#file__Input{
+ width: 33px;
+ height: 25.6px;
+  opacity: 0;
+  position: relative;
+  left: 22px;
+  z-index: 1;
+}
 /* .btn__disable{
     opacity: .5 !important;
     cursor: not-allowed !important;
