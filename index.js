@@ -6,6 +6,7 @@ const server = http.createServer(app)
 const cors =require('cors')
 const router=require('./routes/routes')
 const fileUpload =require('express-fileupload')
+const path= require('path')
 
 //middlewares
 app.use(cors())
