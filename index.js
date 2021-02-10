@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
   }));
-
+ 
   if(process.env.NODE_ENV==='production'){
     app.use(express.static(path.join(__dirname,'./client/build')))
     }      
