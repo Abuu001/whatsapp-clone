@@ -29,6 +29,7 @@ pool.connect(async(err,client)=>{
 router.get('/messages',async(req,res)=>{
     try {
         const response = await pgClient.query("SELECT * FROM whatsappmainmessages  ORDER BY  groups ASC ");
+        // const response = await pgClient.query("SELECT messages,groups,groups_id,images FROM whatsappmainmessages RIGHT JOIN whatsappimages ON whatsappimages.groups_id = whatsappmainmessages.groups ORDER BY  groups ASC");
 
         res.status(200).json({
             length : response.rows.length,
@@ -44,9 +45,8 @@ router.get('/messages',async(req,res)=>{
 //post messages api
 router.post('/messages',async(req,res)=>{
     try {
-        const {name,image,messages,time_sent}= req.body;
-    
-        const response = await pgClient.query("INSERT INTO whatsappMainMessages (messages,time_sent,image_sent,name)  VALUES($1,$2,$3,$4) RETURNING *",[messages,time_sent,image,name])
+        const {name,messages,time_sent}= req.body;
+        const response = await pgClient.query("INSERT INTO whatsappmainmessages (messages,time_sent,name)  VALUES($1,$2,$3) RETURNING *",[messages,time_sent,name])
 
         if(req.method === 'POST'){
             await pusher.trigger('watch_whatsappmainmessages', 'new_record', response.rows[0]);
@@ -88,14 +88,43 @@ router.delete('/messages/:id',async(req,res)=>{
     }
 })
  
+//posting uploads
 router.post('/uploads',async(req,res)=>{
     try {
-        //fetching the name of the img
+        
         const img = req.files.file;
-        let uploadPath = path.join(__dirname,"../client/src/uploads/"+img.name)
-   
-        //moving the image to uploads path
-       await  img.mv(uploadPath)
+        const {name} =req.body
+
+      let uploadPath = path.join(__dirname,"../client/src/uploads/"+img.name)
+      console.log(uploadPath);
+
+      //moving the image to uploads path    
+      await  img.mv(uploadPath) 
+
+        let response = await pool.query('INSERT INTO whatsappimages (image_name ,images_path) VALUES($1,$2) RETURNING * ',[name,uploadPath]);
+
+       res.status(200).json({   
+        length : response.rows.length,
+        message : response.rows  
+       })
+
+    } catch (error) {
+        res.status(500).json({
+            message : "An error occurred"
+        }) 
+    }
+}) 
+
+//getting uploads
+router.get('/uploads',async(req,res)=>{
+    try {
+        const response = await pool.query("SELECT * FROM whatsappimages  ORDER BY  groups_id ASC ");
+    
+        res.status(200).json({
+            length : response.rows.length,
+            message : response.rows
+        } )
+
     } catch (error) {
         res.status(500).json({
             message : "An error occurred"
