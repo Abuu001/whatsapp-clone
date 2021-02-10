@@ -24,11 +24,11 @@ const Chat= ({authInfo})=> {
        await axios.get('/api/v1/uploads')
         .then(response=>{
             console.log(response.data.message[0].image_name);
-
+       
             // const startPath="'"
             // const endPath="'"
-            // const first = startPath.concat(response.data.message[0].images_path.trim().split(" '"))
-            // const realImg =first.concat(endPath)
+            // const first = startPath.concat(response.data.message[0].images_path.trim())
+            // const  realImg =first.concat(endPath)
             const realImg = response.data.message[0].image_name
             console.log(realImg);
             setImages(realImg)
@@ -97,19 +97,7 @@ const Chat= ({authInfo})=> {
         <div className="chat__Section"  >
             {/* <ScrollToBottom  mode="bottom" behaviour="smooth" > */}
                 <FlipMove  enterAnimation="fade">
-
-                <div className= "chat you" >
-                <span >
-                 Junee
-                </span> 
-                <p className="msg">
-                    <img src={images}  alt="Image" /> 
-                </p>
-                <span className="time">2:52 PM</span> 
-                <CancelOutlinedIcon fontSize="small"  className="cancelBtn" />
-            </div>  
-                 {msgLoop}            
-                 <img src={`../../uploads/philly.jpg`}alt="Image" /> 
+                 {msgLoop}           
                 </FlipMove> 
             {/* </ScrollToBottom> */}
         </div> 
