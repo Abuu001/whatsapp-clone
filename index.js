@@ -22,5 +22,5 @@ app.use(fileUpload({
 
 app.use("/api/v1",router)
 
-const PORT= process.env.PORT || 3004;
-server.listen(PORT,()=>console.log(`Server Running in port ${PORT}`));
+const PORT= process.env.PORT ;
+server.listen(PORT,()=>console.log(`Server Running in port ${PORT}`)); 

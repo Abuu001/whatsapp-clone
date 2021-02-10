@@ -36,7 +36,7 @@ router.get('/messages',async(req,res)=>{
             message : response.rows
         } )
     } catch (error) {
-        res.status(500).json({
+        res.status(500).json({  
             message : "An error occurred"
         })
     }

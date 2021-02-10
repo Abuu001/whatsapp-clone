@@ -14,7 +14,7 @@ ALTER TABLE whatsappMainMessages ADD COLUMN name VARCHAR(20) NOT NULL;
 
 INSERT INTO table_name(column1, column2, …)VALUES (value1, value2, …);
 
-INSERT INTO whatsappMainMessages(messages, time_sent,image_sent,name)VALUES ('red', '12:00 PM','', 'Martha') RETURNING *;
+INSERT INTO whatsappMainMessages(messages, time_sent,name)VALUES ('red', '12:00 PM', 'Vocha') RETURNING *;
 
 ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent  TYPE  TIME DEFAULT CURRENT_TIME(1);
 
