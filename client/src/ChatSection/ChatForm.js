@@ -25,11 +25,10 @@ function ChatForm({authInfo}) {
 
         //if there !text => dont send empty msgs
         if(!sendMsg.length <1 && !sendMsg !=='' ){
-
-            const currentTime =moment().format('LT');
+            
+            const currentTime =moment().format('LT');  //fetches the time posted
             const data={
                 name : authInfo[0].additionalUserInfo?.profile.given_name,
-                image : sendFile,
                 messages : sendMsg,
                 time_sent : currentTime
             }
@@ -53,15 +52,23 @@ function ChatForm({authInfo}) {
                     'Content-Type' : 'multipart/form-data'
                 }
             }
-        
-         axios.post("/api/v1/uploads",formData,fileConfig)
+ 
+            axios.post("/api/v1/uploads",formData,fileConfig)
         }
 
         setSendMsg('') 
-        setSendFile(null)
+        setSendFile('')
         setOpenEmojiPicker(false)
     } 
     
+    const handleFileChange=(e)=>{
+        setSendFile(e.target.files[0])
+
+        //after img sent clear the filechooser
+        if(sendFile === ''){
+            return e.target.value =null;
+        }
+    }
     
     useEffect(()=>{   
        submitMsgHandler()
@@ -74,7 +81,7 @@ function ChatForm({authInfo}) {
                 <div className="action__Butn">
                     <i className="far fa-smile form__Icon"  value={sendMsg} onClick={()=>setOpenEmojiPicker(prevState=>!prevState)}></i> 
                   <span className="file__clip"> 
-                        <input  type="file" name="image" id="file__Input"  accept=".jpg" onChange={e=>setSendFile(e.target.files[0])}/>
+                        <input  type="file" name="image" id="file__Input"  accept=".jpg" onChange={e=>handleFileChange(e)}/>
                         <i className="fas fa-paperclip form__Icon file__clip__Icon"  ></i>
                   </span>
                 </div>

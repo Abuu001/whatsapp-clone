@@ -44,4 +44,20 @@ SELECT * FROM whatsappmainmessages  WHERE messages IS NOT NULL  OR messages !=""
     ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent DROP DEFAULT;
     ALTER TABLE whatsappMainMessages ALTER COLUMN time_sent TYPE VARCHAR(10)   ;
 
- 
+ CREATE TABLE whatsappimages(
+     groups_id  BIGSERIAL PRIMARY KEY,
+     image_name VARCHAR(255) ,
+     images_path VARCHAR(255) 
+  );
+
+CREATE TABLE whatsappMainMessages(
+    id uuid  DEFAULT  uuid_generate_v4 () ,
+    groups BIGSERIAL PRIMARY KEY NOT NULL ,
+    messages  VARCHAR(255) NOT NULL,
+    time_sent  VARCHAR(17) ,
+   name  VARCHAR(20) NOT NULL
+);
+
+  INSERT INTO whatsappimages (sender_name,time_sent,images) VALUES ('Mokat','2:04 PM','/media/lugonzo/New Volume/Web projects/React/whatsapp-clone/client/src/uploads/fall.jpg');
+  SELECT messages,groups,groups_id,images FROM whatsappmainmessages RIGHT JOIN whatsappimages ON whatsappimages.groups_id = whatsappmainmessages.groups;
+
