@@ -96,8 +96,6 @@ router.post('/uploads',async(req,res)=>{
         const {name} =req.body
 
       let uploadPath = path.join(__dirname,"../client/src/uploads/"+img.name)
-      console.log(uploadPath);
-
       //moving the image to uploads path    
       await  img.mv(uploadPath) 
 
