@@ -11,7 +11,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 const Chat= ({authInfo})=> {
  
     const [messages,setMessages]=useState([])
-    const [images,setImages]=useState('')
+    //const [images,setImages]=useState('')
 
     const getMessages=()=>{
          axios.get("/api/v1/messages")
@@ -20,22 +20,22 @@ const Chat= ({authInfo})=> {
         }).catch(err=>console.log(err))
     }
 
-    const getImages=async()=>{
-       await axios.get('/api/v1/uploads')
-        .then(response=>{
-          //  console.log(response.data.message[0].image_name);
+    // const getImages=async()=>{
+    //    await axios.get('/api/v1/uploads')
+    //     .then(response=>{
+    //       //  console.log(response.data.message[0].image_name);
        
-            // const startPath="'"
-            // const endPath="'"
-            // const first = startPath.concat(response.data.message[0].images_path.trim())
-            // const  realImg =first.concat(endPath)
-            const realImg = response.data.message[0].image_name
-            console.log(realImg);
-            setImages(realImg);
+    //         // const startPath="'"
+    //         // const endPath="'"
+    //         // const first = startPath.concat(response.data.message[0].images_path.trim())
+    //         // const  realImg =first.concat(endPath)
+    //         const realImg = response.data.message[0].image_name
+    //         console.log(realImg);
+    //         setImages(realImg);
            
-            // console.log(response);
-        })
-    }
+    //         // console.log(response);
+    //     })
+    // }
 
     const deleteMsgHandler= (id)=>{
        // toast.warning("Message deleted !!!",{position:"top-right"})
@@ -44,7 +44,7 @@ const Chat= ({authInfo})=> {
  
     useEffect(()=>{
         getMessages() 
-        getImages()
+        //getImages()
         deleteMsgHandler()
     },[]) 
 
@@ -78,7 +78,7 @@ const Chat= ({authInfo})=> {
             channel.unsubscribe();
             channel_delete.unsubscribe()
         }
-    },[messages,images])
+    },[messages])
 
     const msgLoop=messages.map(msg=>{
         return(
