@@ -23,7 +23,7 @@ const Chat= ({authInfo})=> {
     const getImages=async()=>{
        await axios.get('/api/v1/uploads')
         .then(response=>{
-            console.log(response.data.message[0].image_name);
+          //  console.log(response.data.message[0].image_name);
        
             // const startPath="'"
             // const endPath="'"
