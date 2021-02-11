@@ -31,7 +31,7 @@ const Chat= ({authInfo})=> {
             // const  realImg =first.concat(endPath)
             const realImg = response.data.message[0].image_name
             console.log(realImg);
-            setImages(realImg)
+            setImages(realImg);
            
             // console.log(response);
         })

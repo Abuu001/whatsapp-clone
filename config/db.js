@@ -1,5 +1,5 @@
 const {Pool}=require('pg');
-require('dotenv').config({path : "./dev.env"})
+require('dotenv').config({path : "./dev.env"});
 
 
 // const pool = new Pool({
