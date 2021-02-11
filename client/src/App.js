@@ -55,8 +55,9 @@ const App= ()=> {
                     <i className="fas fa-user icon__block__profileName "></i>
                     <input type="text" name="name" placeholder="Your Name"  className="Prof__input"/>
                   </div>
-                  <input type="submit" className="Login__SubmitBtn" value="Join Now" />
-                <button  onClick={signIn}><i className="fab fa-google  " aria-hidden="true"></i></button>
+                  {/* <input type="submit" className="Login__SubmitBtn" value="Join Now" /> */}
+                  <p>Login with</p>
+                  <i className="fab fa-google  login__Icon" aria-hidden="true"  onClick={signIn} ></i>
                 </form>
               </div>
             </div>

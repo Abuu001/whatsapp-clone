@@ -99,6 +99,14 @@
   cursor: pointer;
   margin-bottom: 5px;
 }
+.login__Icon{
+  font-size: 40px;
+  color: #46c756;
+}
+.login__Icon:hover{
+  cursor: pointer;
+  color: #1fe636;
+}
 @media (max-width: 428px){
   .whatsapp__Logo{
       width: 80px;
