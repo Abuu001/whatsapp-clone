@@ -18,8 +18,8 @@ app.use(fileUpload({
  
   if(process.env.NODE_ENV==='production'){
     app.use(express.static(path.join(__dirname,'./client/build')))
-    }      
-
+  }      
+ 
 app.use("/api/v1",router)
 
 const PORT= process.env.PORT ;
