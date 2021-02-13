@@ -10,10 +10,13 @@ require('dotenv').config({path : "./dev.env"});
 //     port:  process.env.PG_PORT
 // })
 
-const devConfig=`postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`
-const prodConfig = process.env.DATABASE_URL
+// const devConfig=`postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`
+// const prodConfig = process.env.DATABASE_URL
+
 const pool = new Pool({
-    connectionString : process.env.NODE_ENV !=='production' ?  devConfig : prodConfig
+   // connectionString : process.env.NODE_ENV !=='production' ?  devConfig : prodConfig,
+   connectionString: process.env.DATABASE_URL,
+    ssl:true
 });
  
 module.exports =pool;
