@@ -6,7 +6,7 @@ const path=require('path')
 let pgClient;
 pool.connect(async(err,client)=>{
     try {
-        if(err) {
+        if(err) { 
             console.log("there was an error connecting to the db");
         }
     
