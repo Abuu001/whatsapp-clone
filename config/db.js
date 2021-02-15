@@ -16,14 +16,14 @@ const devConfig = `postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@
 //   // connectionString:  process.env.NODE_ENV === "production" ? prodConfig : devConfig,
   
 // });  
-const env = process.env.NODE_ENV || 'development';
-if (env === 'development') {
-  connectionString = {  connectionString :`postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`}
+
+if (env = process.env.NODE_ENV === 'production') {
+    connectionString = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+    };
 } else {
-  connectionString = {
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-  };
+  connectionString = {  connectionString :`postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`}
 };
 
 const pool = new Pool(connectionString);
