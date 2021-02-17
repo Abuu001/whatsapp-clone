@@ -1,6 +1,6 @@
 //multer is used to handle uploading files
 const multer = require('multer')
-require('dotenv').config({path : '../config/.env'})
+require('dotenv').config({path : './.env'})
 const path =require('path')
 const {v4 : uuidv4} = require('uuid')
 
@@ -45,7 +45,7 @@ const imageMsgFileStorage=multer.diskStorage({
         cb(null,Date.now()+".webm")
     }
 })
-
+   
 exports.imageMgsFileUpload=multer({
     storage:imageMsgFileStorage,
     limits : {fileSize : 1000000}

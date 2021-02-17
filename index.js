@@ -1,9 +1,9 @@
-require('dotenv').config({path : "./config/.env"});
+require('dotenv').config({path : "./.env"});
 const express =require('express');
 const app =express()
 const http= require('http')
 const server = http.createServer(app)
-const cors =require('cors')
+const cors =require('cors') 
 const router=require('./routes/routes')
 const fileUpload =require('express-fileupload')
 const path= require('path')
