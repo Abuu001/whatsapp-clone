@@ -1,4 +1,4 @@
-require('dotenv').config({path : './dev.env'})
+require('dotenv').config({path : './.env'})
 const Pusher = require("pusher");
 
 const pusher = new Pusher({

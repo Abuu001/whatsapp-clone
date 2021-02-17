@@ -1,6 +1,6 @@
 //multer is used to handle uploading files
 const multer = require('multer')
-require('dotenv').config({path : '../config/dev.env'})
+require('dotenv').config({path : '../config/.env'})
 const path =require('path')
 const {v4 : uuidv4} = require('uuid')
 
@@ -10,7 +10,7 @@ exports.getUniqueId=()=>{
 
 exports.getTime=()=>{
     return Date.now()
-}
+} 
 
 //upload profile pic
 const userProfileStorage=multer.diskStorage({

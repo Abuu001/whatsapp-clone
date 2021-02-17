@@ -72,7 +72,7 @@ const Chat= ({authInfo})=> {
             pusher_delete.bind('delete', (newMessage)=> { 
             setMessages(newMessage)
         });
-        return()=>{  
+        return()=>{   
             channel.unbind_all()
             channel_delete.unbind_all()
             channel.unsubscribe();

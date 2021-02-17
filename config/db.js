@@ -1,5 +1,5 @@
 const { Pool } = require("pg");
-require("dotenv").config({ path: "./dev.env" });
+require("dotenv").config({ path: "./.env" }); 
 
 // const pool = new Pool({
 //     user : process.env.PG_USER,
@@ -28,4 +28,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const pool = new Pool(connectionString);
 
-module.exports = pool;
+module.exports = pool;           

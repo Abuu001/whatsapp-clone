@@ -1,4 +1,4 @@
-require('dotenv').config({path : "./config/dev.env"});
+require('dotenv').config({path : "./config/.env"});
 const express =require('express');
 const app =express()
 const http= require('http')
@@ -7,9 +7,9 @@ const cors =require('cors')
 const router=require('./routes/routes')
 const fileUpload =require('express-fileupload')
 const path= require('path')
-
-//middlewares
-app.use(cors())
+ 
+//middlewares 
+app.use(cors()) 
 app.use(express.static("uploads"),)
 app.use(express.json())
 app.use(fileUpload({
