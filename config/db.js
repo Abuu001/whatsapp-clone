@@ -17,7 +17,7 @@ const devConfig = `postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@
   
 // });  
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.DB_ENVIRONMENT === 'production') {
     connectionString = {
     connectionString: process.env.DATABASE_URL,
     ssl: true
